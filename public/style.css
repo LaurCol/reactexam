@@ -19,10 +19,8 @@ nav
     background-color:#0070ba;
     background-image: linear-gradient(190deg,#0070ba,#1546a0);
     border-right: solid 5px #0070ba;
-    transform: translatey(-15vh);
     transition: all 1s;
 }
-
 #nav.hidden
 {
     left:-20vw;
@@ -36,18 +34,6 @@ nav button
     height:100%;
     width:100%;
 }
-
-nav button a{
-    text-decoration: none;
-    color:white;
-}
-
-nav button a:hover{
-    text-decoration: none;
-    color:rgb(176, 180, 185);
-}
-
-
 nav .title
 {
     height:10vh;
@@ -91,22 +77,10 @@ nav .title
     font-size: 1.2vw;
     overflow: hidden;
 }
-
-#navbar-button:hover
-{
-    color:rgb(176, 180, 185);
-}
-
 #navbar-button h1
 {
     font-size: 2.5vw;
 }
-
-#navbar-button h1:hover
-{
-    color:rgb(176, 180, 185);
-}
-
 #navbar-menu
 {
     width:100%;
@@ -129,7 +103,7 @@ nav .title
 }
 #navbar-menu button
 {
-    padding: 1.2vmin 0;
+    padding: 2vmin 0;
     border-top: solid 3px #0070ba;
     border-bottom: solid 3px #0070ba;
 }
@@ -139,27 +113,6 @@ nav .title
     text-decoration: none;
     font-size: 2.5vmin;
 }
-
-.btn-primary{
-    background-color:#0070ba;
-    margin-top:2vmin;
-    color: white;
-    background-image: linear-gradient(100deg,#0070ba,#1546a0);
-    padding:1.3vmin;
-    border-radius: 1.5rem;
-    border: .0625rem solid #0070ba;
-    font-size: 2.2vmin;
-}
-
-h3{
-    font-size: 2.5vmin;
-}
-
-#navbar-menu a:hover
-{
-    color:rgb(176, 180, 185);
-}
-
 #nav-hider
 {
     height:100%;
@@ -171,7 +124,6 @@ h3{
     background-color: transparent;
     transition: all 1s;
     opacity: 0.25;
-    transform: translateY(-15vh);
 }
 #nav-hider:hover
 {
@@ -192,13 +144,11 @@ h3{
     margin-left: 20%;
     transition: all 1s;
 }
-
 #page.hidden
 {
     width:100%;
     margin-left: 0;
 }
-
 .header
 {
     width: 100%; 
@@ -208,7 +158,6 @@ h3{
     background-color: #0070ba;
     background-image: linear-gradient(100deg,#0070ba,#1546a0);
 }
-
 .header img
 {
     padding-left:3px;
@@ -220,7 +169,6 @@ h3{
     left:50%;
     transform: translate(-50%,-50%);
 }
-
 .header h1
 {
     position: absolute;
@@ -229,14 +177,12 @@ h3{
     left:70%;
     font-size: 5vmin;
 }
-
 .containerFlash
 {
     width:100%;
     box-sizing: border-box;
     padding:5vmin;
 }
-
 .alert
 {
     background-color: #fff;
@@ -247,22 +193,18 @@ h3{
     font-size: 2.2vmin;
     text-align: center;
 }
-
 .alert-success
 {
     background-color: #18BC9C;
 }
-
 .alert-warning
 {
     background-color: #F39C12;
 }
-
 .alert-error
 {
     background-color: #E74C3C;
 }
-
 .content
 {
     width:100%;
@@ -281,9 +223,7 @@ h3{
     position: relative;
     font-size: 2vmin;
     text-align: center;
-    transition: all 1s;
 }
-
 .container>div
 {
     background-color: #fff;
@@ -292,7 +232,6 @@ h3{
     border: 1px solid #e0e0e0;
     margin-bottom: 1vmin;
 }
-
 .container h1
 {
     margin-bottom: 1vmin;
@@ -365,7 +304,6 @@ h3{
     color:white;
     background-image: linear-gradient(100deg,#0070ba,#1546a0);
     padding:1vmin;
-    font-size: 0.8em;
     position: relative;
 }
 .textCard:after {
@@ -485,11 +423,6 @@ h3{
     color:#0070ba;
     font-size: 4vmin;
 }
-
-.commentaireChange{
-    width:20%;
-}
-
 .commentaireForm input
 {
     width:60%;
