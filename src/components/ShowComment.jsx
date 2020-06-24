@@ -13,9 +13,11 @@ const ShowComment = ({commentaire}) => {
   <div class=" rounded mb-3 py-3 px-3">
   <strong>{ commentaire.user.email}</strong>, le  {formatDate(commentaire.date)} a dit: 
   <br/>
-                              <blockquote>
+                              <div className="commentblock">
                                   {commentaire.message}
-                              </blockquote>
+                              </div>
+                              <blockquote>Note : {commentaire.note} / 5</blockquote>
+                              
                           </div>
         )}
   

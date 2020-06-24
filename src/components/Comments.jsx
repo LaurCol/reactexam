@@ -71,15 +71,17 @@ const Comments = (props) => {
         <div class="container">
             <h1>Commenter l'article</h1>
             <form onSubmit={handleSubmit}>
-            <select name="note" id="note" value={postComment.note} onChange={handleChange}>
+            
+            <textarea id="message" name="message" value={postComment.message} onChange={handleChange}/>
+            <div><select name="note" id="note" value={postComment.note} onChange={handleChange}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-            </select>
-            <textarea id="message" name="message" value={postComment.message} onChange={handleChange}/>
-            <div><button type="submit" className="btn btn-success">Envoyer</button></div>
+            </select><button type="submit" className="btn btn-success ml-3">Envoyer</button>
+            </div>
+            <div></div>
             
             </form>
             </div>

@@ -23,6 +23,21 @@ nav
     transition: all 1s;
 }
 
+.error-message {
+    background-color:  #0070ba;
+    border: 1px solid #1c1f20;
+    
+    padding: 20px 30px;
+  }
+
+  .conn {
+      margin-left:3vw;
+    text-align:center;
+  }
+
+
+
+
 #nav.hidden
 {
     left:-20vw;
@@ -40,6 +55,20 @@ nav button
 nav button a{
     text-decoration: none;
     color:white;
+}
+
+button a{
+    text-decoration: none;
+    color:white;
+}
+
+#mailto{
+    margin-left: 1vw;
+}
+
+#ajoute{
+    color: rgb(48, 146, 100);
+    text-emphasis: bold;
 }
 
 nav button a:hover{
@@ -283,6 +312,11 @@ h3{
     text-align: center;
     transition: all 1s;
 }
+
+.rounded{
+    border: 1px solid #1c1f20;
+}
+
 
 .container>div
 {

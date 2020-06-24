@@ -3,7 +3,7 @@ import PrivateRoute from './components/PrivateRoute'
 import AuthContext from './contexts/AuthContext'
 import authAPI from './services/authAPI'
 import './App.css';
-import { BrowserRouter, Switch, Route } from "react-router-dom"
+import { HashRouter, Switch, Route } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import InstrumentsPage from './pages/InstrumentsPage'
 import DisquesPage from './pages/DisquesPage'
@@ -38,7 +38,7 @@ function App() {
   return (
 <>
     <AuthContext.Provider value={contextValue}>
-    <BrowserRouter>
+    <HashRouter>
     <Header/>
     <Navbar/>
     <Switch>
@@ -55,7 +55,7 @@ function App() {
     <Route path="/" component={HomePage} />
     </Switch>
     <Footer/>
-    </BrowserRouter>
+    </HashRouter>
     <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
     </AuthContext.Provider>
 </>  );

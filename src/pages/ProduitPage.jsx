@@ -6,10 +6,25 @@ import { Link } from "react-router-dom"
 import AuthContext from '../contexts/AuthContext'
 import ShowComment from '../components/ShowComment'
 import Comments from '../components/Comments';
+import { LoremIpsum } from "lorem-ipsum";
+import ReactPlayer from 'react-player/youtube'
 
 const ProduitPage = (props) => {
 
         const {isAuthenticated } = useContext(AuthContext)
+
+        const [acheter, setAcheter] = useState(true)
+
+        const lorem = new LoremIpsum({
+            sentencesPerParagraph: {
+              max: 8,
+              min: 4
+            },
+            wordsPerSentence: {
+              max: 16,
+              min: 4
+            }
+          });
 
         var {id} = props.match.params
         const [produit, setProduit] = useState({
@@ -17,7 +32,8 @@ const ProduitPage = (props) => {
             prix:"",
             photo:"",
             commentaires:"",
-            note:""
+            note:"",
+            video:""
         })
 
 
@@ -34,7 +50,8 @@ const ProduitPage = (props) => {
         
         useEffect(()=>{
                 fetchProduit(id)
-        })
+        },[])
+
     
         const formatDate = (str) => moment(str).format('DD/MM/YYYY')
     
@@ -49,10 +66,11 @@ const ProduitPage = (props) => {
             data = data ? data.split(",") : []
             data.push(id)
             let myPrix = window.localStorage.getItem("prix")
-            myPrix = myPrix ? myPrix.split(",") : []
-            myPrix.push(prix)
+            let total = (myPrix) ? parseFloat(myPrix) + parseFloat(prix) : parseFloat(prix)
+          
             window.localStorage.setItem("panier", data.toString())
-            window.localStorage.setItem("prix", myPrix)
+            window.localStorage.setItem("prix", total)
+            setAcheter(false)
         }
 
     return (
@@ -67,11 +85,24 @@ const ProduitPage = (props) => {
                 </div>
                 <div className="info">
                     <h3>Prix : {produit.prix} €</h3>
-                    <h3>Note moyenne : {produit.avgNote}</h3>
-                    <button onClick={()=>pushToPanier(produit.id,produit.prix)}>Ajouter</button>
-                </div>
-            </div>
+    <h3>Description : <div>{lorem.generateSentences(5)}</div></h3>
+                    {(acheter) ? (
+                        <button onClick={()=>pushToPanier(produit.id,produit.prix)}>Ajouter</button>
 
+                    ) : 
+                    (
+                        <div id="ajoute">Ajouté</div>
+                    )
+                    }
+                </div>
+                
+            </div>
+            
+            {(produit.video != "") ? (
+                <ReactPlayer url={produit.video} />
+            ) : (
+               <></> 
+            )}
 
             <div className="row align-items-center">
                      <h2 className="mb-3">Commentaires</h2>
@@ -85,7 +116,19 @@ const ProduitPage = (props) => {
            <h3>Cet article n'a pas encore reçu de commentaire ...</h3>
            
            </> )}
-           {(isAuthenticated) &&      <Comments id={id} /> }
+           {(isAuthenticated) ?
+           ( <> <Comments id={id} /> </>) : ( 
+           <> 
+
+         <div className="error-message"> Vous devez vous connecter pour pouvoir commenter</div> 
+         <br/>
+       <div className="conn"><Link to="/login">Se connecter</Link></div>
+
+           </>
+
+           )     }
+
+
             </div>
         </div>
     </div>
