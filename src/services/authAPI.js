@@ -15,8 +15,6 @@ function authenticate(credentials){
             .then(token => {
                 // utilisation du localstorage pour stocker notre token
                 window.localStorage.setItem("authToken", token)
-                window.localStorage.setItem("panier", [])
-                window.localStorage.setItem("prix", [])
                 // on prévient axios qu'on a un header par défaut sur toutes nos futures requêtes HTTP
                 Axios.defaults.headers["Authorization"]="Bearer " + token
 

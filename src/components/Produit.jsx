@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import jwtDecode from "jwt-decode"
 import { toast } from 'react-toastify';
 import Axios from 'axios';
+import usePanier from "./usePanier";
 
 
 const Produit = (props) => {
 
-    const [show, setShow] = useState(true)
-
+    const { removeProduct, changeQuantityfromSelect, panier } = usePanier();
     const [product,setProduct]= useState({
         id: props.id,
         categorie: "",
@@ -15,6 +15,7 @@ const Produit = (props) => {
         prix: "",
         photo: ""
     })
+    
 
     const fetchProduit= async id =>{
         try {
@@ -28,37 +29,37 @@ const Produit = (props) => {
         }
     }
 
+    function renderOptionsElements() {
+        const selectElement = [];
+        for (let i = 0; i <= 10; ++i) {
+            selectElement.push(<option value={i} >{i}</option>)
+        }
+
+        return selectElement;
+    }
+
    useEffect(()=>{
-        fetchProduit(props.id)
+       fetchProduit(props.id)
+       
    },[])
     
     const handleClick = () => {
-        let data = window.localStorage.getItem("panier")
-        data = data ? data.split(",") : []
-        let filtered = data.filter(item => item !== props.id)
-        //let filtered = data.splice((props.nb),1)
-        console.log(filtered)
-        window.localStorage.setItem("panier", filtered.toString())
-        setShow(false)
-        let myPrix = window.localStorage.getItem("prix")
-        let total = (myPrix) ? parseFloat(myPrix) - parseFloat(product.prix) : 0
-        window.localStorage.setItem("prix", total)
-        window.location.reload();
+        
     }
     
 
     return ( 
 
         <>
-            {(show) && (
                 <>
                 <div>
                     <h1>Produit: {product.nom}</h1>
                     <h1>Prix: {parseFloat(product.prix).toLocaleString()}</h1>
-                    <button onClick={handleClick}>Annuler</button>
+                    <select onChange={(e) => changeQuantityfromSelect(e.target.value, product.id)} value={panier.products[props.id].quantity}>{renderOptionsElements()}</select>
+                    <button class="panierPageSuppr" onClick={() => removeProduct(product.id) }>Supprimer</button>
                 </div>
                 </>
-            )}
+            
             
 
         </>

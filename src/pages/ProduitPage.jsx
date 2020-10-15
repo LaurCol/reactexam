@@ -8,25 +8,16 @@ import ShowComment from '../components/ShowComment'
 import Comments from '../components/Comments';
 import { LoremIpsum } from "lorem-ipsum";
 import ReactPlayer from 'react-player/youtube'
+import usePanier from "../components/usePanier"
 
 const ProduitPage = (props) => {
 
         const {isAuthenticated } = useContext(AuthContext)
 
-        const [acheter, setAcheter] = useState(true)
-
-        const lorem = new LoremIpsum({
-            sentencesPerParagraph: {
-              max: 8,
-              min: 4
-            },
-            wordsPerSentence: {
-              max: 16,
-              min: 4
-            }
-          });
-
-        var {id} = props.match.params
+    const [acheter, setAcheter] = useState(true)
+    const { addProduct, isProductPresent } = usePanier();
+    const id = props.match.params.id
+    const nom = props.match.params.nom
         const [produit, setProduit] = useState({
             nom:"",
             prix:"",
@@ -35,14 +26,31 @@ const ProduitPage = (props) => {
             note:"",
             video:""
         })
+    const lorem = new LoremIpsum({
+        sentencesPerParagraph: {
+            max: 8,
+            min: 4
+        },
+        wordsPerSentence: {
+            max: 16,
+            min: 4
+        }
+    });
+    const buyButtonLabel = isProductPresent(id) ? "Modifier" : "Ajouter";
 
+        function renderOptionsElements() {
+            const selectElement = [];
+            for (let i = 1; i <= 10; ++i) {
+               selectElement.push(<option value={i} >{i}</option>)
+            }
+
+            return selectElement;
+        }
 
         const fetchProduit = async id => {
             try{
                 const data = await produitsAPI.find(id)
                 setProduit(data)
-             
-            
             }catch(error){
                toast.error("Impossible de charger le produit")
             }
@@ -61,18 +69,6 @@ const ProduitPage = (props) => {
             )
         })
 
-        const pushToPanier=(id,prix)=>{
-            let data = window.localStorage.getItem("panier")
-            data = data ? data.split(",") : []
-            data.push(id)
-            let myPrix = window.localStorage.getItem("prix")
-            let total = (myPrix) ? parseFloat(myPrix) + parseFloat(prix) : parseFloat(prix)
-          
-            window.localStorage.setItem("panier", data.toString())
-            window.localStorage.setItem("prix", total)
-            setAcheter(false)
-        }
-
     return (
         <>
     
@@ -85,9 +81,11 @@ const ProduitPage = (props) => {
                 </div>
                 <div className="info">
                     <h3>Prix : {produit.prix} €</h3>
-    <h3>Description : <div>{lorem.generateSentences(5)}</div></h3>
-                    {(acheter) ? (
-                        <button onClick={()=>pushToPanier(produit.id,produit.prix)}>Ajouter</button>
+    <h3>Description : <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div></h3>
+                            {(acheter) ? (
+                                <><button onClick={() => addProduct(produit.id, produit.nom, document.getElementById("productQuantity").value, produit.prix)}>{buyButtonLabel}</button>
+                                    <select id="productQuantity">{renderOptionsElements()}</select>
+                                    </>
 
                     ) : 
                     (

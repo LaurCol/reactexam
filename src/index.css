@@ -10,8 +10,8 @@ body
 
 nav
 {
-    height:100vh;
-    width:20vw;
+    height:85vh;
+    width:13vw;
     position: fixed;
     z-index: 10;
     color:white;
@@ -19,29 +19,34 @@ nav
     background-color:#0070ba;
     background-image: linear-gradient(190deg,#0070ba,#1546a0);
     border-right: solid 5px #0070ba;
-    transform: translatey(-15vh);
     transition: all 1s;
+    bottom:-78vh;
 }
-
-.error-message {
-    background-color:  #0070ba;
-    border: 1px solid #1c1f20;
-    
-    padding: 20px 30px;
-  }
-
-  .conn {
-      margin-left:3vw;
-    text-align:center;
-  }
-
 
 
 
 #nav.hidden
 {
-    left:-20vw;
+    bottom:-0vh;
 }
+
+.error-message {
+    font-size:3vh;
+  }
+
+  .conn {
+    margin-left:3vw;
+    text-align:center;
+    font-size:3vh;
+    background-color:  #0070ba;
+    border: 1px solid #1c1f20;
+    padding: 15px;
+  }
+
+  .conn a{
+      color:white;
+  }
+
 
 nav button
 {
@@ -79,13 +84,15 @@ nav button a:hover{
 
 nav .title
 {
-    height:10vh;
+    height:7.5vh;
     border-bottom: solid 3px #0070ba;
 }
 .title button
 {
-    font-size: 3vw;
+    font-size: 2vw;
 }
+
+
 .nav-menu
 {
     height:79%;
@@ -311,6 +318,7 @@ h3{
     font-size: 2vmin;
     text-align: center;
     transition: all 1s;
+    flex-wrap: wrap;
 }
 
 .rounded{
@@ -364,13 +372,12 @@ h3{
 }
 .produitCard
 {
-    height:25vh;
-    width:23.5%;
+    height:40vh;
+    width:40%;
     display: inline-block;
     box-sizing: border-box;
     margin: 1vmin;
     padding:0 !important;
-    border-radius: 1.5rem !important;
     border: .0625rem solid #0070ba !important;
     overflow: hidden;
 }
@@ -388,20 +395,36 @@ h3{
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    width:100%;
+    max-width:100%;
+    max-height:100%;
 }
 .textCard
 {
     background-color:#0070ba;
     box-sizing: border-box;
-    height:20%;
+    height:30%;
     width: 100%;
     color:white;
     background-image: linear-gradient(100deg,#0070ba,#1546a0);
     padding:1vmin;
-    font-size: 0.8em;
+    text-align: justify;
+    font-size: 1.8vw;
     position: relative;
 }
+
+@media(max-width: 1600px) {
+    .textCard {
+        font-size: 2.3vw;
+     }
+  }
+
+  @media(max-width: 1100px) {
+    .textCard {
+        font-size: 2.8vw;
+     }
+  }
+
+  
 .textCard:after {
     content: " ";
     visibility: hidden;
@@ -412,10 +435,12 @@ h3{
 .textCard .nomProdCard
 {
     float:left;
+    max-width: 65%;
 }
 .textCard .prixProdCard
 {
     float:right;
+    max-width: 35%;
 }
 .container>h1
 {
@@ -450,6 +475,13 @@ h3{
     float:left;
     width:50%;
 }
+
+.infoProduit .info #productQuantity{
+    margin:1vh;
+}
+
+
+
 .infoProduit .info button a
 {
     text-decoration: none;
@@ -652,8 +684,82 @@ footer
 {
     background-color:#0070ba;
     background-image: linear-gradient(290deg,#0070ba,#1546a0);
-    padding: 2vmin ;
+    padding-top: 2vmin;
+  padding-right: 2vmin;
+  padding-left: 2vmin;
+  padding-bottom: 10vmin;
     font-size: 2vmin;
     color: white;
     text-align: center;
 }
+
+.panierPageSuppr{
+    margin: 1vw;
+}
+
+#floatingPanier {
+    height: 40%;
+    width: 25%;
+    position: fixed;
+    z-index: 10;
+    color: #0070ba;
+    bottom: 0;
+    right: 0;
+    transition: all 1s;
+    border: .0625rem solid #0070ba !important;
+    text-align:right;
+    background-color: white;
+    overflow-y:scroll;
+    display:block;
+    bottom:-32.7%
+
+}
+
+@media(max-width: 1600px) {
+    #floatingPanier {
+        width: 85vw;
+     }
+  }
+
+
+#floatingPanier.hidden{
+    bottom:0%;
+}
+
+
+#floatingPanier h2 {
+    border-bottom: .0625rem solid #0070ba;
+    font-size: 6vh;
+    cursor: pointer;
+    text-align: center;
+}
+
+#floatingPanier h2:hover {
+    color:green;
+}
+
+#floatingPanier .productContainer {
+    margin: 3%;
+}
+
+#floatingPanier .productName {
+    float:left;
+    font-size: 20px;
+}
+
+#floatingPanier  .productPrice {
+    float: left;
+    margin-left: 50px;
+    font-size: 20px;
+}
+
+#floatingPanier .productQuantity {
+    float: right;
+    font-size: 20px;
+}
+
+#floatingPanier #totalPrice{
+    bottom:0;
+    font-size: 30px;
+}
+
